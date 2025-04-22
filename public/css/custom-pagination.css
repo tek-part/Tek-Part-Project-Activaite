@@ -1,0 +1,36 @@
+.custom-pagination .pagination {
+    margin-bottom: 0;
+}
+
+.custom-pagination .page-item .page-link {
+    border-radius: 50%;
+    margin: 0 3px;
+    color: #6c757d;
+    background-color: #f8f9fa;
+    border-color: #dee2e6;
+    width: 36px;
+    height: 36px;
+    text-align: center;
+    line-height: 22px;
+}
+
+.custom-pagination .page-item.active .page-link {
+    background-color: #03436b;
+    border-color: #03436b;
+    color: white;
+}
+
+.custom-pagination .page-item.disabled .page-link {
+    color: #6c757d;
+    background-color: #f8f9fa;
+}
+
+.custom-pagination .page-link:hover {
+    color: #03436b;
+    background-color: #e9ecef;
+}
+
+.custom-pagination .page-item:first-child .page-link,
+.custom-pagination .page-item:last-child .page-link {
+    border-radius: 30%;
+}
