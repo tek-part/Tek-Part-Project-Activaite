@@ -20,6 +20,14 @@ class LicenseController extends Controller
     /**
      * Validate a license key
      */
+    public function validate(Request $request)
+    {
+        return $this->validateLicenseKey($request);
+    }
+
+    /**
+     * Validate a license key
+     */
     public function validateLicenseKey(Request $request)
     {
         $validator = Validator::make($request->all(), [
