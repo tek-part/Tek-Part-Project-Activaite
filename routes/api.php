@@ -23,7 +23,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // License Management API with middleware protection
 // Route::middleware(['auth:sanctum', 'license.permission:license-api-access'])->group(function () {
     Route::prefix('license')->group(function () {
-        Route::post('/validate', [LicenseController::class, 'validate']);
+        Route::post('/validate', [LicenseController::class, 'validateLicense']);
         Route::post('/activate', [LicenseController::class, 'activate']);
         Route::post('/deactivate', [LicenseController::class, 'deactivate']);
         Route::post('/check', [LicenseController::class, 'check']);
