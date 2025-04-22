@@ -12,7 +12,8 @@
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
         "santigarcor/laratrust": "^8.3",
-        "spatie/laravel-backup": "^9.2"
+        "spatie/laravel-backup": "^9.2",
+        "tekpart/license": "dev-main"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
