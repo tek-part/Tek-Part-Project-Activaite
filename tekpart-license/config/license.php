@@ -15,7 +15,7 @@ return [
     'key' => env('TEKPART_LICENSE_KEY', ''),
 
     // عنوان خادم التحقق من الترخيص
-    'verification_server' => env('TEKPART_VERIFICATION_SERVER', 'https://licenses.tekpart.com'),
+    'verification_server' => env('TEKPART_VERIFICATION_SERVER', 'https://license.tek-part.com'),
 
     // هل يتم التحقق من الترخيص عن بعد
     'verify_remotely' => env('TEKPART_VERIFY_REMOTELY', true),
