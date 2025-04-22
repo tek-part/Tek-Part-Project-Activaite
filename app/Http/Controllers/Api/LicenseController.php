@@ -22,13 +22,11 @@ class LicenseController extends Controller
      */
     public function validateLicenseKey(Request $request)
     {
-        return $request->all();
         $validator = Validator::make($request->all(), [
             'license_key' => 'required|string',
             'domain' => 'nullable|string',
             'product_id' => 'nullable|string',
         ]);
-
 
         if ($validator->fails()) {
             return response()->json([
