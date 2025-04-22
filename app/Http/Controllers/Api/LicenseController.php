@@ -237,4 +237,32 @@ class LicenseController extends Controller
             ]
         ]);
     }
+
+    /**
+     * Check if license exists and is activated for the specified domain
+     */
+    public function checkDomainLicense(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'license_key' => 'required|string',
+            'domain' => 'required|string',
+            'product_id' => 'required|string',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Validation error',
+                'errors' => $validator->errors()
+            ], 422);
+        }
+
+        $result = $this->licenseService->checkDomainLicense(
+            $request->license_key,
+            $request->domain,
+            $request->product_id
+        );
+
+        return response()->json($result, $result['success'] ? 200 : 400);
+    }
 }

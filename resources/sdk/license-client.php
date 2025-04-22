@@ -174,6 +174,33 @@ class LicenseClient
     }
 
     /**
+     * Check if license exists, is active, and matches the specified domain
+     *
+     * @return array|false License data if successful, false otherwise
+     */
+    public function checkDomain()
+    {
+        $endpoint = '/api/license/check-domain';
+        $data = [
+            'license_key' => $this->licenseKey,
+            'product_id' => $this->productId,
+            'domain' => $this->domain,
+        ];
+
+        $response = $this->makeRequest($endpoint, $data);
+        if (!$response) {
+            return false;
+        }
+
+        if (!isset($response['success']) || $response['success'] !== true) {
+            $this->lastError = $response['message'] ?? 'Domain check failed.';
+            return false;
+        }
+
+        return $response['data'] ?? false;
+    }
+
+    /**
      * Get the last error message
      *
      * @return string|null The last error message

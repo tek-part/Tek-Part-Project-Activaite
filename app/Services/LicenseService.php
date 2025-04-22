@@ -269,4 +269,95 @@ class LicenseService
             ];
         }
     }
+
+    /**
+     * Check if license exists, is active, and is activated for the specified domain
+     *
+     * @param string $licenseKey The license key to check
+     * @param string $domain The domain to check against
+     * @param string $productId The product ID to check
+     * @return array The result of the check
+     */
+    public function checkDomainLicense(string $licenseKey, string $domain, string $productId): array
+    {
+        $license = License::where('license_key', $licenseKey)
+                          ->where('product_id', $productId)
+                          ->first();
+
+        if (!$license) {
+            $this->logLicenseAction(null, 'check_domain', false, [
+                'license_key' => $licenseKey,
+                'domain' => $domain,
+                'product_id' => $productId,
+            ], ['message' => 'License not found']);
+
+            return [
+                'success' => false,
+                'message' => 'License not found',
+            ];
+        }
+
+        // Check if license is active
+        if (!$license->is_active) {
+            $this->logLicenseAction($license->id, 'check_domain', false, [
+                'license_key' => $licenseKey,
+                'domain' => $domain,
+                'product_id' => $productId,
+            ], ['message' => 'License is not active']);
+
+            return [
+                'success' => false,
+                'message' => 'License is not active',
+            ];
+        }
+
+        // Check if domain matches
+        if ($license->domain !== $domain) {
+            $this->logLicenseAction($license->id, 'check_domain', false, [
+                'license_key' => $licenseKey,
+                'domain' => $domain,
+                'product_id' => $productId,
+            ], ['message' => 'Domain mismatch']);
+
+            return [
+                'success' => false,
+                'message' => 'Domain mismatch',
+            ];
+        }
+
+        // Check expiration
+        if (!$license->is_permanent && $license->isExpired()) {
+            $this->logLicenseAction($license->id, 'check_domain', false, [
+                'license_key' => $licenseKey,
+                'domain' => $domain,
+                'product_id' => $productId,
+            ], ['message' => 'License has expired']);
+
+            return [
+                'success' => false,
+                'message' => 'License has expired',
+            ];
+        }
+
+        $responseData = [
+            'license_id' => $license->id,
+            'product' => $license->product->only(['name', 'product_id', 'version', 'features']),
+            'is_permanent' => $license->is_permanent,
+            'expires_at' => $license->expires_at,
+            'domain' => $license->domain,
+            'activated_at' => $license->activated_at,
+        ];
+
+        $this->logLicenseAction($license->id, 'check_domain', true, [
+            'license_key' => $licenseKey,
+            'domain' => $domain,
+            'product_id' => $productId,
+        ], $responseData);
+
+        return [
+            'success' => true,
+            'message' => 'License is valid for this domain',
+            'data' => $responseData,
+        ];
+    }
 }
