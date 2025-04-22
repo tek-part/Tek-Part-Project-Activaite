@@ -58,8 +58,8 @@
                             <div class="p-3 bg-light border rounded mb-4">
                                 <p>أنشئ ملف <code>composer.json</code> الذي يحدد تفاصيل حزمتك:</p>
                                 <pre dir="ltr" class="mt-2 bg-dark text-light p-2">{
-    "name": "vendor-name/package-name",
-    "description": "وصف الحزمة الخاصة بك",
+    "name": "tek-part/tekpart-license",
+    "description": "نظام حماية الشفرة المصدرية وإدارة التراخيص لمشاريع Laravel",
     "type": "library",
     "license": "MIT",
     "authors": [
@@ -237,7 +237,7 @@ return [
     }
 ]</pre>
                                 <p>ثم قم بتنفيذ الأمر التالي:</p>
-                                <pre dir="ltr" class="mt-2 bg-dark text-light p-2">composer require vendor-name/package-name</pre>
+                                <pre dir="ltr" class="mt-2 bg-dark text-light p-2">composer require tek-part/tekpart-license</pre>
                             </div>
 
                             <h3 class="mt-4 fw-semibold fs-5 text-primary">٨. نشر الحزمة على GitHub</h3>
@@ -259,7 +259,7 @@ git push -u origin main</pre>
                                     <li>أكمل عملية التسجيل</li>
                                 </ol>
                                 <p>بعد التسجيل، سيتمكن المطورون من تثبيت حزمتك باستخدام:</p>
-                                <pre dir="ltr" class="mt-2 bg-dark text-light p-2">composer require vendor-name/package-name</pre>
+                                <pre dir="ltr" class="mt-2 bg-dark text-light p-2">composer require tek-part/tekpart-license</pre>
                             </div>
 
                             <h3 class="mt-4 fw-semibold fs-5 text-primary">١٠. إعداد التحديثات التلقائية</h3>
@@ -304,10 +304,10 @@ git push -u origin main</pre>
                                 <p>لتثبيت الباكدج في مشروع Laravel، اتبع الخطوات التالية:</p>
 
                                 <h5 class="mt-3 fw-semibold">تثبيت الباكدج باستخدام Composer</h5>
-                                <pre dir="ltr" class="mt-2 bg-dark text-light p-2">composer require tekpart/license</pre>
+                                <pre dir="ltr" class="mt-2 bg-dark text-light p-2">composer require tek-part/tekpart-license</pre>
 
                                 <h5 class="mt-3 fw-semibold">نشر ملفات الإعدادات والترحيلات</h5>
-                                <pre dir="ltr" class="mt-2 bg-dark text-light p-2">php artisan vendor:publish --provider="TekPart\License\LicenseServiceProvider"</pre>
+                                <pre dir="ltr" class="mt-2 bg-dark text-light p-2">php artisan vendor:publish --provider="LaravelReady\LicenseServer\LicenseServiceProvider"</pre>
 
                                 <h5 class="mt-3 fw-semibold">تشغيل الترحيلات</h5>
                                 <pre dir="ltr" class="mt-2 bg-dark text-light p-2">php artisan migrate</pre>
